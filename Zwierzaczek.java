@@ -10,7 +10,7 @@ public class Zwierzaczek {
 	 
 	 @Override
 	 public String toString(){
-		 return "imie: " +name;
+		 return name;
 	 }
 	
 	
