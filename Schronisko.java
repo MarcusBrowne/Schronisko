@@ -1,11 +1,13 @@
 package schronisko;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +18,28 @@ public class Schronisko {
 	Scanner sc = new Scanner(System.in);
 	Zwierzaczek z;
 	
+	
+	File bazaDanych = new File("BazaDanych.txt");
+	String load = bazaDanych.toString();
+	Scanner s = new Scanner(load);
+	
+	
+	public void ZaladujListe() {
+		
+		
+		try {
+			while (s.hasNextLine()) {
+			String podziel[] = s.nextLine().split(",");
+				for (int i = 0; i < podziel.length; i++) {
+					String podzial[] = podziel[i].split(",");
+					
+					 
+				}
+			}
+		} finally {
+			sc.close();
+		}
+	}
 	
 	public void WyswietlListe() {
 		boolean pusta = ListaZwierzat.isEmpty();
@@ -87,8 +111,11 @@ public class Schronisko {
 				case 4:
 					ZapiszStan();
 					break;
+				case 5:
+					ZaladujListe();
+					break;
 				default:
-					System.out.println("Blad! Wybierz liczbe od 1 do 3!");
+					System.out.println("Blad! Wybierz liczbe od 1 do 4!");
 				}
 			} catch (Exception e) {
 				System.out.println("Blad programu!");
@@ -103,10 +130,7 @@ public class Schronisko {
 	
 	public static void main(String[] args) throws IOException {
 		
-		File bazaDanych = new File("BazaDanych.txt");
-		FileReader fr = new FileReader(bazaDanych);
-		fr.close();
-	
+
 		
 		Schronisko program = new Schronisko();
 		program.Wlacz();
