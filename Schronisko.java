@@ -1,44 +1,45 @@
 package schronisko;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JPanel;
+
 public class Schronisko {
-	
+
 	List<Zwierzaczek> ListaZwierzat = new ArrayList<Zwierzaczek>(5);
 	Scanner sc = new Scanner(System.in);
 	Zwierzaczek z;
+
 	
-	
-	File bazaDanych = new File("BazaDanych.txt");
-	String load = bazaDanych.toString();
-	Scanner s = new Scanner(load);
 	
 	
 	public void ZaladujListe() {
-		
-		
+		String file = "BazaDanych.txt";
 		try {
-			while (s.hasNextLine()) {
-			String podziel[] = s.nextLine().split(",");
-				for (int i = 0; i < podziel.length; i++) {
-					String podzial[] = podziel[i].split(",");
-					
-					 
-				}
+			InputStream is = new FileInputStream(file);
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String line;	
+			while ((line = br.readLine()) != null) {
+				System.out.println(line);
 			}
-		} finally {
-			sc.close();
-		}
+			br.close();
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}		
 	}
 	
 	public void WyswietlListe() {
@@ -54,7 +55,7 @@ public class Schronisko {
 		}
 	}
 	
-	public void DodajZwierzaka() {
+	public void DodajZwierzaka() throws IOException {
 		System.out.println("Wpisz imie zwierzaka");
 		String imie = sc.nextLine();
 		z = new Zwierzaczek(imie);
@@ -92,7 +93,8 @@ public class Schronisko {
 			"Wybierz 1 aby wyswietlic liste zwierzat" + "\n" +
 			"Wybierz 2 aby dodac zwierzaka do schroniska" +"\n" +
 			"Wybierz 3 aby usun¹æ zwierzaka ze schroniska" +"\n" +
-			"Wybierz 4 aby zapisac stan schroniska");
+			"Wybierz 4 aby zapisac stan schroniska" +"\n" +
+			"Wybierz 5 aby obejrzec baze danych zwierzat");
 			
 			try {
 				Scanner odczyt = new Scanner(System.in);
@@ -115,7 +117,7 @@ public class Schronisko {
 					ZaladujListe();
 					break;
 				default:
-					System.out.println("Blad! Wybierz liczbe od 1 do 4!");
+					System.out.println("Blad! Wybierz liczbe od 1 do 5!");
 				}
 			} catch (Exception e) {
 				System.out.println("Blad programu!");
